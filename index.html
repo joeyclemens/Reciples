@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mild Dan Dan Noodles</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1208;
+      --paper: #fdf6e9;
+      --warm: #f5e8c8;
+      --accent: #c94a1a;
+      --accent-light: #f0a070;
+      --muted: #8a7560;
+      --border: #e0cfa8;
+    }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 4rem 2rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '麵';
+      position: absolute;
+      right: -0.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18rem;
+      opacity: 0.06;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      border: 1px solid var(--accent-light);
+      color: var(--accent-light);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.3em 0.8em;
+      border-radius: 2px;
+      margin-bottom: 1.2rem;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      color: #c8b89a;
+      max-width: 540px;
+      margin-bottom: 2rem;
+    }
+
+    .meta-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .pill {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 100px;
+      padding: 0.3em 1em;
+      font-size: 0.82rem;
+      color: #ddd0b8;
+      display: flex;
+      align-items: center;
+      gap: 0.4em;
+    }
+
+    /* ─── Layout ─── */
+    .content {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+    /* ─── Servings ─── */
+    .servings-bar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--warm);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.4rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .servings-bar label {
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      flex: 1;
+    }
+
+    .servings-control {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .srv-btn {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      border: 1.5px solid var(--accent);
+      background: transparent;
+      color: var(--accent);
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .srv-btn:hover { background: var(--accent); color: #fff; }
+
+    #srv-count {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      min-width: 2rem;
+      text-align: center;
+    }
+
+    /* ─── Section headings ─── */
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .section-title .icon {
+      color: var(--accent);
+      font-size: 1rem;
+    }
+
+    /* ─── Ingredients ─── */
+    .ingredients {
+      margin-bottom: 3rem;
+    }
+
+    .ingredient-list {
+      list-style: none;
+    }
+
+    .ingredient-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--border);
+      gap: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .ingredient-list li:last-child { border-bottom: none; }
+
+    .ing-name { color: var(--ink); }
+
+    .ing-amount {
+      font-weight: 500;
+      color: var(--accent);
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .ing-aside {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-style: italic;
+      display: block;
+    }
+
+    /* ─── Steps ─── */
+    .steps { margin-bottom: 3rem; }
+
+    .step {
+      display: grid;
+      grid-template-columns: 3rem 1fr;
+      gap: 0 1.2rem;
+      margin-bottom: 1.8rem;
+      animation: fadeUp 0.4s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .step:nth-child(1) { animation-delay: 0.05s; }
+    .step:nth-child(2) { animation-delay: 0.1s; }
+    .step:nth-child(3) { animation-delay: 0.15s; }
+    .step:nth-child(4) { animation-delay: 0.2s; }
+
+    .step-num {
+      width: 3rem; height: 3rem;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--paper);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .step-body {}
+
+    .step-title {
+      font-weight: 500;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.35rem;
+    }
+
+    .step-text {
+      font-size: 0.97rem;
+      color: #3a2e1e;
+    }
+
+    .step-timer {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4em;
+      margin-top: 0.7rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      background: var(--warm);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.25em 0.8em;
+    }
+
+    /* ─── Notes ─── */
+    .notes-box {
+      background: var(--warm);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 1.4rem 1.6rem;
+      margin-bottom: 3rem;
+    }
+
+    .notes-box .section-title {
+      border-bottom-color: var(--border);
+      font-size: 1.1rem;
+    }
+
+    .note-item {
+      margin-bottom: 0.9rem;
+      font-size: 0.93rem;
+    }
+
+    .note-item:last-child { margin-bottom: 0; }
+
+    .note-item strong {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 480px) {
+      .hero { padding: 3rem 1.2rem 2.5rem; }
+      .content { padding: 2rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="hero-tag">Asian · Vegetarian · Under 30 min</span>
+    <h1>Mild Dan Dan<br><em style="font-style:italic;font-weight:400;">Noodles</em></h1>
+    <p class="hero-desc">A family-friendly take on the Sichuan classic — rich sesame-peanut sauce, springy noodles, and a savoury tofu topping. Heat dialled back for little ones, chilli oil on the side for adults.</p>
+    <div class="meta-pills">
+      <span class="pill">⏱ Under 30 minutes</span>
+      <span class="pill">🌱 Vegetarian</span>
+      <span class="pill">👶 Toddler-friendly</span>
+    </div>
+  </div>
+</header>
+
+<main class="content">
+
+  <!-- Servings -->
+  <div class="servings-bar">
+    <label>Servings</label>
+    <div class="servings-control">
+      <button class="srv-btn" id="srv-down" aria-label="Fewer servings">−</button>
+      <span id="srv-count">4</span>
+      <button class="srv-btn" id="srv-up" aria-label="More servings">+</button>
+    </div>
+  </div>
+
+  <!-- Ingredients -->
+  <section class="ingredients">
+    <h2 class="section-title"><span class="icon">◆</span> Ingredients</h2>
+    <ul class="ingredient-list" id="ingredient-list">
+      <!-- injected by JS -->
+    </ul>
+  </section>
+
+  <!-- Steps -->
+  <section class="steps">
+    <h2 class="section-title"><span class="icon">◆</span> Method</h2>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">Make the sauce</div>
+        <p class="step-text">Whisk together the sesame paste or peanut butter, tahini, soy sauce, rice vinegar, sesame oil, warm water, and sugar until completely smooth. Taste and adjust — it should be nutty, savoury, and slightly tangy. Set aside.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">Cook the noodles</div>
+        <p class="step-text">Cook the noodles according to packet instructions. In the last minute, add the pak choi or spinach to the boiling water to wilt. Drain everything together and toss with a little sesame oil to stop sticking.</p>
+        <div class="step-timer">⏱ ~5 min</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">Fry the tofu</div>
+        <p class="step-text">Heat vegetable oil in a pan over medium-high heat. Add the crumbled firm tofu and fry for 5–6 minutes, breaking it up as it cooks. Add garlic and ginger and fry for another minute. Season with a splash of soy sauce.</p>
+        <div class="step-timer">⏱ ~7 min</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-title">Assemble</div>
+        <p class="step-text">Divide noodles and greens into bowls. Spoon the sauce over generously and toss to coat. Top with the tofu mixture, sliced spring onions, and toasted sesame seeds. Serve chilli oil on the side for the adults.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Notes -->
+  <div class="notes-box">
+    <h2 class="section-title"><span class="icon">◆</span> Tips & Notes</h2>
+    <div class="note-item"><strong>Toddler tip:</strong> The sauce as written is mild, but taste before serving. If using shop-bought peanut butter, some brands are quite rich — thin with extra warm water for a smaller portion.</div>
+    <div class="note-item"><strong>Noodle swap:</strong> Udon works really well here and tends to go down a treat with kids. Spaghetti in a pinch is totally fine too.</div>
+    <div class="note-item"><strong>Make it quicker:</strong> The sauce takes 2 minutes to make. If you prep it while the noodles boil, the whole thing comes in well under 25 minutes.</div>
+    <div class="note-item"><strong>Storage:</strong> The sauce keeps in the fridge for 3–4 days. Make a double batch and use it as a dipping sauce or cold noodle dressing mid-week.</div>
+  </div>
+
+</main>
+
+<footer>Mild Dan Dan Noodles · Family Recipe</footer>
+
+<script>
+  const BASE = 4;
+  let servings = 4;
+
+  const ingredients = [
+    { name: "Noodles (medium egg or wheat)", amount: 400, unit: "g" },
+    { name: "Firm tofu, crumbled", amount: 400, unit: "g" },
+    { name: "Garlic cloves, minced", amount: 3, unit: "", aside: "approx." },
+    { name: "Fresh ginger, grated", amount: 1, unit: "tsp" },
+    { name: "Soy sauce", amount: 3, unit: "tbsp" },
+    { name: "Sesame paste or smooth peanut butter", amount: 3, unit: "tbsp" },
+    { name: "Tahini", amount: 1, unit: "tbsp" },
+    { name: "Rice vinegar", amount: 1, unit: "tbsp" },
+    { name: "Sesame oil", amount: 2, unit: "tbsp" },
+    { name: "Warm water", amount: 4, unit: "tbsp" },
+    { name: "Sugar", amount: 1, unit: "tsp" },
+    { name: "Vegetable oil", amount: 1, unit: "tbsp" },
+    { name: "Pak choi or spinach", amount: 200, unit: "g" },
+    { name: "Spring onions, sliced", amount: 3, unit: "", aside: "approx." },
+    { name: "Toasted sesame seeds", amount: 1, unit: "tbsp" },
+    { name: "Chilli oil (adults, on the side)", amount: 1, unit: "tbsp" },
+  ];
+
+  function fmtAmount(base, unit, srv) {
+    const scaled = (base / BASE) * srv;
+    const rounded = Math.round(scaled * 10) / 10;
+    return rounded + (unit ? " " + unit : "");
+  }
+
+  function render() {
+    const list = document.getElementById("ingredient-list");
+    list.innerHTML = ingredients.map(ing => `
+      <li>
+        <span class="ing-name">${ing.name}${ing.aside ? `<span class="ing-aside">${ing.aside}</span>` : ""}</span>
+        <span class="ing-amount">${fmtAmount(ing.amount, ing.unit, servings)}</span>
+      </li>
+    `).join("");
+    document.getElementById("srv-count").textContent = servings;
+  }
+
+  document.getElementById("srv-up").addEventListener("click", () => { servings = Math.min(servings + 1, 20); render(); });
+  document.getElementById("srv-down").addEventListener("click", () => { servings = Math.max(servings - 1, 1); render(); });
+
+  render();
+</script>
+</body>
+</html>
